@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Simulation</title>
+  </head>
+  <body>
+    <img id="imgCell" src="assets/images/cell.png" alt="" />
+    <img id="imgCellResistant" src="assets/images/cell-resistant.png" alt="" />
+    <div class="control">
+      <div>
+        <label for="totalCells">Total Cells:</label>
+        <input id="totalCells" type="text" value="10" />
+      </div>
+      <div>
+        <label for="resistantCells">Resistant Cells:</label>
+        <input id="resistantCells" type="text" value="2" />
+      </div>
+      <div class="slideContainer">
+        <div id="intensityDisplay">Intensity: 0%</div>
+        <input
+          id="intensity"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="slider"
+        />
+      </div>
+      <button id="populateButton">Populate</button>
+      <button id="startButton">Start</button>
+      <button id="stopButton">Stop</button>
+    </div>
+    <canvas id="simScreen" width="1000" height="800"> </canvas>
+    <div class="simInfoDisplay">
+      <div id="stateDisplay">IDLE...</div>
+      <div id="totalCellsDisplay">Total Cells:</div>
+      <div id="resistantCellsDisplay">Resistant Cells:</div>
+    </div>
+
+    <script src="src/index.js" type="module"></script>
+  </body>
+</html>
