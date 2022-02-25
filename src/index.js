@@ -1,10 +1,13 @@
 import Sim from "/src/sim.js";
 import { sleep } from "/src/utils.js";
+import { SIMSTATE } from "/src/simstates.js";
 
 let canvas = document.getElementById("simScreen");
 let populateButton = document.getElementById("populateButton");
 let startButton = document.getElementById("startButton");
-let stopButton = document.getElementById("stopButton");
+let resetButton = document.getElementById("resetButton");
+let totalCellsDisplay = document.getElementById("totalCellsDisplay");
+let resistantCellsDisplay = document.getElementById("resistantCellsDisplay");
 
 let ctx = canvas.getContext("2d");
 
@@ -37,12 +40,16 @@ populateButton.addEventListener("click", () => {
 });
 
 startButton.addEventListener("click", async () => {
-  sim.start();
-  await sleep(4000);
-  sim.reproduce();
+  await sim.start();
+  resistantCellsDisplay.innerHTML = sim.getCells().resistant;
+  await sleep(6000);
+  if (sim.getState() !== SIMSTATE.STOPPED) {
+    sim.reproduce();
+  }
+  resistantCellsDisplay.innerText = sim.getCells().resistant;
 });
 
-stopButton.addEventListener("click", () => {
+resetButton.addEventListener("click", () => {
   sim.stop();
 });
 

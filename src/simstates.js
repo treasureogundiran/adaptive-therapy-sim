@@ -1,0 +1,6 @@
+export const SIMSTATE = {
+  STOPPED: 0,
+  DESTROYING: 1,
+  REPRODUCING: 2,
+  POPULATING: 3,
+};

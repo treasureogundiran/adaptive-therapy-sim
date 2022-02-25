@@ -10,9 +10,10 @@
   <body>
     <img id="imgCell" src="assets/images/cell.png" alt="" />
     <img id="imgCellResistant" src="assets/images/cell-resistant.png" alt="" />
+    <img id="imgRadiation" src="assets/images/radiation.png" alt="" />
     <div class="control">
       <div>
-        <label for="totalCells">Total Cells:</label>
+        <label for="totalCells">Initial Cells:</label>
         <input id="totalCells" type="text" value="10" />
       </div>
       <div>
@@ -32,13 +33,26 @@
       </div>
       <button id="populateButton">Populate</button>
       <button id="startButton">Start</button>
-      <button id="stopButton">Stop</button>
+      <button id="resetButton">Reset</button>
     </div>
     <canvas id="simScreen" width="1000" height="800"> </canvas>
     <div class="simInfoDisplay">
-      <div id="stateDisplay">IDLE...</div>
-      <div id="totalCellsDisplay">Total Cells:</div>
-      <div id="resistantCellsDisplay">Resistant Cells:</div>
+      <div class="simInfoContainer">
+        <label for="stateDisplay">State: </label>
+        <div id="stateDisplay">IDLE...</div>
+      </div>
+      <div class="simInfoContainer">
+        <label for="cycles">Treatment Cycles: </label>
+        <div id="cycles">0</div>
+      </div>
+      <div class="simInfoContainer">
+        <label for="totalCellsDisplay">Total Cells: </label>
+        <div id="totalCellsDisplay">10</div>
+      </div>
+      <div class="simInfoContainer">
+        <label for="resistantCellsDisplay">Resistant Cells: </label>
+        <div id="resistantCellsDisplay">2</div>
+      </div>
     </div>
 
     <script src="src/index.js" type="module"></script>

@@ -1,6 +1,7 @@
 import Cell from "/src/cell.js";
 
 import { randomRange, sleep } from "/src/utils.js";
+import { SIMSTATE } from "/src/simstates.js";
 
 ///
 let intensitySlider = document.getElementById("intensity");
@@ -17,31 +18,30 @@ let resistantCellsInput = document.getElementById("resistantCells");
 let stateDisplay = document.getElementById("stateDisplay");
 let totalCellsDisplay = document.getElementById("totalCellsDisplay");
 let resistantCellsDisplay = document.getElementById("resistantCellsDisplay");
+let cyclesDisplay = document.getElementById("cycles");
 ///
 
-const MAX_CELLS = 1000;
-const SIMSTATE = {
-  STOPPED: 0,
-  DESTROYING: 1,
-  REPRODUCING: 2,
-};
+const MAX_CELLS = 500;
 
 export default class Sim {
   constructor(simWidth, simHeight) {
+    this.radiationImage = document.getElementById("imgRadiation");
+
+    this.simstate = SIMSTATE.POPULATING;
+
     this.simWidth = simWidth;
     this.simHeight = simHeight;
 
     this.totalCells = totalCellsInput.value;
     this.resistantCells = resistantCellsInput.value;
     this.intensity = 0.01 * intensitySlider.value;
-    this.numToDestroy = Math.floor(this.intensity * this.totalCells);
 
-    this.cycleCount = 100;
+    this.cycleCount = 25;
     this.cycle = 1;
 
     this.cells = [];
 
-    this.simstate = SIMSTATE.STOPPED;
+    this.numToDestroy = Math.floor(this.intensity * this.cells.length);
   }
 
   populate() {
@@ -64,55 +64,53 @@ export default class Sim {
       }
     }
 
-    totalCellsDisplay.innerHTML = "Total Cells: " + this.cells.length;
+    totalCellsDisplay.innerHTML = this.cells.length;
 
     this.numToDestroy = Math.floor(this.intensity * this.cells.length);
+
+    this.simstate = SIMSTATE.POPULATING;
     return;
   }
 
   async start() {
+    if (this.simstate == SIMSTATE.STOPPED) {
+      this.reset();
+      return;
+    }
     this.simstate = SIMSTATE.DESTROYING;
     stateDisplay.innerHTML = "DESTROYING CELLS...";
-    if (this.numToDestroy == 0 || this.totalCells == this.resistantCells) {
-      totalCellsDisplay.innerHTML = "Total Cells: " + this.cells.length;
+    if (this.numToDestroy == 0 || this.cells.length == this.resistantCells) {
+      this.simstate = SIMSTATE.POPULATING;
+      this.numToDestroy = Math.floor(this.intensity * this.cells.length);
       return;
     }
 
     let index = randomRange(0, this.cells.length);
     if (!this.cells[index].getResistance()) {
       this.cells.splice(index, 1);
+      totalCellsDisplay.innerHTML = this.cells.length;
       this.numToDestroy -= 1;
     }
-    totalCellsDisplay.innerHTML = "Total Cells: " + this.cells.length;
 
-    await sleep(250);
+    await sleep(100);
     this.start();
 
     return;
   }
 
   update(deltaTime) {
-    if (totalCellsInput.value > MAX_CELLS) {
-      totalCellsInput.value = MAX_CELLS;
-    }
-    if (resistantCellsInput.value > MAX_CELLS) {
-      resistantCellsInput.value = MAX_CELLS;
-    }
-
-    this.totalCells = totalCellsInput.value;
-    this.resistantCells = Math.min(
-      resistantCellsInput.value,
-      totalCellsInput.value
-    );
-    this.intensity = 0.01 * intensitySlider.value;
-
-    resistantCellsDisplay.innerHTML = "Resistant Cells: " + this.resistantCells;
+    this.setInitialValues();
   }
 
   draw(ctx) {
     this.cells.forEach((cell) => {
       cell.draw(ctx);
+      totalCellsDisplay.innerHTML = this.cells.length;
+      resistantCellsDisplay.innerHTML = this.resistantCells;
     });
+    if (this.simstate == SIMSTATE.DESTROYING) {
+      ctx.drawImage(this.radiationImage, 50, 50, 100, 100);
+    }
   }
 
   stop() {
@@ -129,14 +127,24 @@ export default class Sim {
     if (this.cells.length <= MAX_CELLS) {
       let l = this.cells.length;
       for (let i = 0; i < this.cycleCount * this.cycle - l; i++) {
-        await sleep(250);
+        if (this.simstate == SIMSTATE.STOPPED) {
+          this.cycle += 1;
+          cyclesDisplay.innerHTML = this.cycle - 1;
+          this.reset();
+          return;
+        }
+        await sleep(100);
         this.cells[i].reproduce();
+        resistantCellsDisplay.innerHTML = this.resistantCells;
+        this.numToDestroy = Math.floor(this.intensity * this.cells.length);
       }
       this.cycle += 1;
+      cyclesDisplay.innerHTML = this.cycle - 1;
     }
-    console.log(this.cells.length);
-    resistantCellsDisplay.innerHTML = "Resistant Cells: " + this.resistantCells;
+    this.numToDestroy = Math.floor(this.intensity * this.cells.length);
     stateDisplay.innerHTML = "IDLE...";
+
+    return;
   }
 
   createCell(xPos, yPos, resistance) {
@@ -145,5 +153,35 @@ export default class Sim {
       this.cells.push(cell);
       if (resistance) this.resistantCells += 1;
     }
+  }
+
+  reset() {
+    this.setInitialValues();
+    stateDisplay.innerHTML = "IDLE...";
+    this.populate();
+  }
+
+  getCells() {
+    return { total: this.cells.length, resistant: this.resistantCells };
+  }
+
+  setInitialValues() {
+    if (totalCellsInput.value > MAX_CELLS) {
+      totalCellsInput.value = MAX_CELLS;
+    }
+    if (resistantCellsInput.value > MAX_CELLS) {
+      resistantCellsInput.value = MAX_CELLS;
+    }
+
+    this.totalCells = parseInt(totalCellsInput.value);
+
+    this.resistantCells = Math.min(
+      parseInt(resistantCellsInput.value),
+      this.totalCells
+    );
+
+    this.intensity = 0.01 * intensitySlider.value;
+
+    return;
   }
 }
