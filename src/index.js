@@ -1,6 +1,4 @@
-import Sim from "/src/sim.js";
-import { sleep } from "/src/utils.js";
-import { SIMSTATE } from "/src/enums.js";
+import Sim from "./sim.js";
 
 
 let canvas = document.getElementById("simScreen");
