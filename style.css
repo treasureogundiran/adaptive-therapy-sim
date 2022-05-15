@@ -1,32 +1,129 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Tahoma, Verdana, Geneva, sans-serif;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #simScreen {
   border: 1px solid black;
+  border-radius: 10px;
 }
 
 img {
   display: none;
 }
 
+
 .control {
   width: 1000px;
-  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.main-control
+{
+  width: 1000px;
+  height: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#totalCells,
-#resistantCells {
-  height: 20px;
-  width: 80px;
+.control-section
+{
+  min-width: 250px;
+  border: 1px solid black;
+  border-bottom: none;
+  border-top: none;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cells-info
+{
+  border: none;
+}
+
+.cells-info label
+{
+  font-weight: bold;
+}
+
+.cells-info div
+{
+  display: flex;
+  justify-content: space-around;
+  width:225px ;
+  align-items: center;
+  height: 40px;
   border-radius: 5px;
-  padding: 5px;
   font-size: 18px;
 }
+
+.cells-info input
+{
+  margin-left: 2px;
+  border: solid 2px black;
+  border-radius: 5px;
+  height: 40px;
+  width: 85px;
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.cells-info input:hover
+{
+  height: 45px;
+  width: 90px;
+  transition: 0.1s;
+}
+
+.celltype-info
+{
+  border-right: none;
+}
+
+.celltype-info h4
+{
+  font-size: 18px;
+}
+
+.celltype-info div
+{
+  width: 225px;
+}
+
+.celltype-info input
+{
+  width: 15px;
+  height: 15px;
+  accent-color: rgb(255, 166, 0);
+}
+
+.celltype-info input:hover
+{
+  width: 20px;
+  height: 20px;
+  transition: 0.1s;
+}
+
 
 button {
   padding: 20px;
@@ -44,44 +141,20 @@ button:hover {
   cursor: pointer;
 }
 
-#startButton {
-  background: rgb(4, 189, 4);
-}
-
-#startButton:hover {
-  background: rgb(27, 214, 27);
-  transition: 0.15s;
-}
-
-#populateButton {
-  background: rgb(113, 24, 230);
-}
-
-#populateButton:hover {
-  background: rgb(143, 67, 243);
-}
-
-#resetButton {
-  background: rgb(230, 8, 8);
-}
-
-#resetButton:hover {
-  background: rgb(250, 14, 14);
-  transition: 0.15s;
-}
 /*  */
 
 .slideContainer {
   width: 200px;
+  /* border: solid 1px blue; */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  border-right: none;
 }
 
 #intensity {
   -webkit-appearance: none;
-  width: 100%;
+  width: 90%;
   height: 15px;
   border-radius: 5px;
   background: rgb(168, 167, 167);
@@ -98,44 +171,204 @@ button:hover {
 #intensity::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  width: 15px;
+  height: 30px;
+  border-radius: 20%;
   background: #3da1ff;
   cursor: pointer;
   opacity: 1;
 }
 
+#intensity::-webkit-slider-thumb:hover
+{
+  width: 20px;
+  height: 35px;
+  transition: 0.1s;
+}
+
 #intensity::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  width: 15px;
+  height: 30px;
+  border-radius: 20%;
   background: #3da1ff;
   cursor: pointer;
 }
 
-.simInfoDisplay {
-  width: 1000px;
-  display: flex;
-  justify-content: space-between;
+#intensity::-moz-range-thumb:hover
+{
+  width: 20px;
+  height: 35px;
+  transition: 0.1s;
 }
 
-.simInfoContainer {
-  display: flex;
-  align-items: center;
-}
-
-.simInfoContainer div {
-  background: black;
-  color: white;
+#intensityDisplay
+{
   font-weight: bold;
-  padding-left: 2px;
-  width: 70px;
-  margin-left: 5px;
-  border: solid 3px black;
-  border-radius: 5px;
+  margin-bottom: 25px;
 }
 
-#stateDisplay {
-  width: 160px;
+
+.score-info
+{
+  border-right: none;
+  justify-content: center;
+}
+
+.score-info input
+{
+  margin-left: 2px;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.score-info input:hover
+{
+  height: 45px;
+  width: 205px;
+  transition: 0.1s;
+}
+
+.score-info button
+{
+  width: 200px;
+  height: 40px;
+  background:rgb(255, 166, 0);
+  font-weight: bold;
+}
+
+.score-info button:hover
+{
+  width: 205px;
+  height: 45px;
+  /* background:rgb(255, 192, 76); */
+  transition: 0.1s;
+}
+
+#instructions-button
+{
+  padding: 0;
+  color: rgb(0, 0, 201);
+  background: none;
+}
+
+#instructions-button:hover
+{
+  color: rgb(40, 40, 250);
+  font-size: 20px;
+  transition: 0.1s;
+}
+
+.modal
+{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 2px solid rgb(24, 69, 59);
+  width: 700px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: rgb(24, 69, 59);
+  color: white;
+}
+
+.modal-body {
+  padding: 20px 20px;
+  height: 700px;
+  overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background: rgb(24, 69, 59);
+  color: white;
+}
+
+.modal-section
+{
+  margin-bottom: 50px;
+  border-top: 1px solid black;
+}
+
+.modal-section img
+{
+  display: block;
+  width: 100%;
+}
+
+.modal-section ul
+{
+  margin: 10px;
+}
+
+.modal-section .main-list
+{
+  margin: 10px;
+}
+
+.modal-section li
+{
+  list-style-type: none;
+  /* margin: 5px auto; */
+}
+
+.main-list li
+{
+  margin: 20px auto;
+}
+
+.secondary-list li
+{
+  margin: 5px auto;
 }

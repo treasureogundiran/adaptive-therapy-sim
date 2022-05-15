@@ -5,55 +5,146 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Simulation</title>
+    <title>Adaptive Therapy Simulation</title>
   </head>
   <body>
     <img id="imgCell" src="assets/images/cell.png" alt="" />
-    <img id="imgCellResistant" src="assets/images/cell-resistant.png" alt="" />
+    <img id="imgCancer" src="assets/images/cancer.png" alt="" />
+    <img id="imgChemoResistant" src="assets/images/chemo-resistant.png" alt="" />
+    <img id="imgRadiationResistant" src="assets/images/radiation-resistant.png" alt="" />
     <img id="imgRadiation" src="assets/images/radiation.png" alt="" />
+    <img id="imgBackground" src="assets/images/woman-on-bed.png" alt="">
+
+    <div id="instructions-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" id="close-instructions-modal">&times;</span>
+          <h2>How To Play</h2>
+        </div>
+        <div class="modal-body">
+          <div class="modal-section">
+            <img src="/assets/images/how-to-play.png" alt="">
+          </div>
+          <div class="modal-section">
+            <h3>Control Panel</h3>
+            <ul class="main-list">
+              <li><strong>Healthy Cells -</strong> Number of healthy cells at the start of the imulation</li>
+              <li><strong>Cancer Cells -</strong> Number of cancer cells at the start of the imulation</li>
+              <li>
+                <strong>Cell Types -</strong>
+                <ul class="secondary-list">
+                  <li><strong>Treatment Sensitive -</strong> Populate the cells with treatment sensitive cancer cells included</li>
+                  <li><strong>Chemo Resistant -</strong> Populate the cells with chemo resistant cancer cells included</li>
+                  <li><strong>Radiation Resistant -</strong> Populate the cells with radiation resistant cancer cells included</li>
+                </ul>
+              </li>
+              <li><strong>Intensity -</strong> The percentage of cells that are destroyed every cycle. For example, an intensity of 50% would randomly destroy 50% of all cells whenever a treatment is applied</li>
+              <li><strong>Name -</strong> Enter your name to save your high scores. If no name is provided, a random name is generated for you</li> 
+              <li><strong>Reset High Scores -</strong> Reset the high score board</li>
+            </ul>
+          </div>
+          <div class="modal-section">
+            <h3>Health & Tumor Bar</h3>
+            <ul class="main-list">
+              <li><strong>Health -</strong> The number of healthy cells of the patient. The game is over when this health reaches 0. Maximum health is 10000</li>
+              <li><strong>Tumor Size -</strong> The number of tumor cells of the patient. The game is over when this bar is full</li>
+            </ul>
+          </div>
+          <div class="modal-section">
+            <h3>High Score Board</h3>
+            <ul class="main-list">
+              <li><strong>High Scores -</strong> A list of the players with the highest patient survival time (measured in cycles)</li>
+            </ul>
+          </div>
+          <div class="modal-section">
+            <h3>Console</h3>
+            <ul class="main-list">
+              <li><strong>Display -</strong>
+                <ul class="secondary-list">
+                  <li><strong>Cell Counts -</strong> Displays information about the different cell types in the simulation</li>
+                  <li><strong>Current Cycle -</strong> The current cycle in the sim. The cycle increases every 5 seconds. Every cycle, each cell in the sim divides into two, therefore the total number of cells are doubled.</li>
+                </ul>
+              </li>
+              <li><strong>Buttons- </strong>
+                <ul class="secondary-list">
+                  <li><strong>Play -</strong> Start the simulation</li>
+                  <li><strong>Chemo -</strong> Apply chemotherapy treatment to the patient</li>
+                  <li><strong>Radiation -</strong> Apply radiation therapy treatment to the patient</li>
+                  <li><strong>Reset -</strong> Repopulate the cells with new cell types</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-section">
+            <h3>Patient</h3>
+            <ul class="main-list">
+              <li><strong>Cells -</strong> This displays the patient and a graphical representation of the cells in the affected area of the patient's body.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <h3>Have fun!</h3>
+        </div>
+      </div>
+    </div>
+
     <div class="control">
-      <div>
-        <label for="totalCells">Initial Cells:</label>
-        <input id="totalCells" type="text" value="10" />
+      <div class="main-control">
+        <div class="control-section cells-info">
+          <div>
+            <label for="healthyCells">Healthy Cells</label>
+            <input id="healthyCells" type="text" value="100" />
+          </div>
+          <div>
+           <label for="cancerCells">Cancer Cells</label>
+            <input id="cancerCells" type="text" value="50" />
+          </div>
+        </div>
+  
+        <div class="control-section celltype-info">
+          <h4>Cell Types</h4>
+          <div>
+            <input class="celltype-checkbox" checked="true" type="checkbox" id="treatment-sensitive-checkbox" name="treatment-sensitive">
+            <label for="treatment-sensitive-checkbox">Treatment Sensitive</label>
+          </div>
+          
+          <div>
+            <input class="celltype-checkbox" checked="true" type="checkbox" id="chemo-resistant-checkbox" name="chemo-resistant">
+            <label for="chemo-resistant-checkbox">Chemo Resistant</label>
+          </div>
+          
+          <div>
+            <input class="celltype-checkbox" checked="true" type="checkbox" id="radiation-resistant-checkbox" name="radiation-resistant">
+            <label for="radiation-resistant-checkbox">Radiation Resistant</label>
+          </div>
+          
+        </div>
+        
+        <div class="control-section slideContainer">
+          <div id="intensityDisplay">Intensity: 0%</div>
+          <input
+            id="intensity"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="slider"
+          />
+        </div>
+  
+        <div class="control-section score-info">
+            <input id="name-input" type="text" value="" placeholder="Name" />
+            <button id="reset-highscores">Reset High Scores</button>
+        </div>
+
       </div>
-      <div>
-        <label for="resistantCells">Resistant Cells:</label>
-        <input id="resistantCells" type="text" value="2" />
+
+      <div class="instructions-section">
+        <button id="instructions-button">How To Play</button>
       </div>
-      <div class="slideContainer">
-        <div id="intensityDisplay">Intensity: 0%</div>
-        <input
-          id="intensity"
-          type="range"
-          min="0"
-          max="100"
-          value="50"
-          class="slider"
-        />
-      </div>
-      <button id="populateButton">Populate</button>
-      <button id="startButton">Start</button>
-      <button id="resetButton">Reset</button>
     </div>
     <canvas id="simScreen" width="1000" height="800"> </canvas>
-    <div class="simInfoDisplay">
-      <div class="simInfoContainer">
-        <label for="stateDisplay">State: </label>
-        <div id="stateDisplay">IDLE...</div>
-      </div>
-      <div class="simInfoContainer">
-        <label for="cycles">Treatment Cycles: </label>
-        <div id="cycles">0</div>
-      </div>
-      <div class="simInfoContainer">
-        <label for="totalCellsDisplay">Total Cells: </label>
-        <div id="totalCellsDisplay">10</div>
-      </div>
-      <div class="simInfoContainer">
-        <label for="resistantCellsDisplay">Resistant Cells: </label>
-        <div id="resistantCellsDisplay">2</div>
-      </div>
-    </div>
+    
 
     <script src="src/index.js" type="module"></script>
   </body>
