@@ -1,4 +1,4 @@
-import { MAX_TUMOR_SIZE,SIM_FONT } from "/src/enums.js";
+import { MAX_TUMOR_SIZE,SIM_FONT } from "./enums.js";
 
 export default class TumorBar {
     constructor(sim, x, y)

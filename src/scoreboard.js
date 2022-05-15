@@ -1,4 +1,4 @@
-import { SIM_FONT } from "/src/enums.js";
+import { SIM_FONT } from "./enums.js";
 
 export default class ScoreBoard {
     constructor(sim, x, y)

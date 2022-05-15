@@ -1,4 +1,4 @@
-import { MAX_CELL_SIZE, SIM_FONT } from "/src/enums.js";
+import { MAX_CELL_SIZE, SIM_FONT } from "./enums.js";
 
 export default class HealthBar {
     constructor(sim, x, y)

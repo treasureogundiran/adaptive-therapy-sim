@@ -1,5 +1,4 @@
-import { randomRange } from "/src/utils.js";
-import { CELLTYPE, CELL_SIZE } from "/src/enums.js";
+import { CELLTYPE, CELL_SIZE } from "./enums.js";
 
 let cell_image = document.getElementById("imgCell");
 let cancer_image = document.getElementById("imgCancer");

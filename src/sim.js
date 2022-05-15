@@ -1,10 +1,10 @@
-import Cell from "/src/cell.js";
+import Cell from "./cell.js";
 import { GetRandomUserName, randomRange, randomChoice, sleep, Logarithm, GetLayers, Shuffle } from "/src/utils.js";
 import { SIMSTATE, CELLTYPE, SIM_FONT, CELL_SIZE, MUTATION_RATE, MAX_CELL_SIZE, MAX_TUMOR_SIZE, MUTATION_MULTIPLIER } from "/src/enums.js";
-import HealthBar from "/src/healthbar.js";
-import TumorBar from "/src/tumorbar.js";
-import Console from "/src/console.js";
-import ScoreBoard from "/src/scoreboard.js";
+import HealthBar from "./healthbar.js";
+import TumorBar from "./tumorbar.js";
+import Console from "./console.js";
+import ScoreBoard from "./scoreboard.js";
 
 let intensitySlider = document.getElementById("intensity");
 let intensityDisplay = document.getElementById("intensityDisplay");

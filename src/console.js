@@ -1,5 +1,5 @@
-import { BUTTONTYPE } from "/src/enums.js";
-import Button from "/src/button.js";
+import { BUTTONTYPE } from "./enums.js";
+import Button from "./button.js";
 
 const BUTTON_SIZE = 50;
 const BUTTON_SPACING = (350 - BUTTON_SIZE*4) / 5
