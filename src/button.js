@@ -1,5 +1,5 @@
-import { SIMSTATE } from "/src/enums.js";
-import { BUTTONTYPE } from "/src/enums.js";
+import { SIMSTATE } from "./enums.js";
+import { BUTTONTYPE } from "./enums.js";
 
 const BUTTON_MARGIN = 6;
 
