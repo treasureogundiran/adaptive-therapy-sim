@@ -1,18 +1,40 @@
-///CONSTANTS FOR THE SIMULATION
+// The states the sim can be in, more states can be added here
 const SIMSTATE = { STOPPED: 0, CHEMO: 1, RADIATION : 2, REPLICATING: 3, PAUSED: 4 };
+
+// The different types of cells, more cell types can be added here
 const CELLTYPE = { HEALTHY : 0, TREATMENT_SENSITIVE : 1, CHEMO_RESISTANT : 2, RADIATION_RESISTANT : 3, NULL : 4 }
+
+// The different types of buttons
 const BUTTONTYPE = { PAUSE : 0, CHEMO : 1, RADIATION : 2, RESET : 3 }
+
+// The maximum number of tumor cells
 const MAX_TUMOR_SIZE = 5000;
+
+// The maximum number of cells
 const MAX_CELL_SIZE = 10000;
-const CELL_SIZE = 10;
-const MUTATION_RATE = 8000;
+
+// The size of a cell in pixels
+const CELL_SIZE = 20;
+
+// The length of a cycle in milliseconds
+const MUTATION_RATE = 4000;
+
+// The rate at which cells multiply each cycle
 const MUTATION_MULTIPLIER = 2;
+
+// The chance that a tumor cell will mutate into a treatment resistant cell in %
 const CHANCE_OF_MUTATION = 10;
+
+// The size of the console buttons in pixels
 const BUTTON_SIZE = 50;
 const BUTTON_SPACING = (350 - BUTTON_SIZE*4) / 5
 const BUTTON_MARGIN = 6;
+
+// The fonts used in the sim
 const SIM_FONT = 'Berlin Sans FB';
 const CONSOLE_FONT = "Berlin Sans FB"
+
+// Random usernames for the username generator
 const USERNAMES = ["mildzebra", "workmancoffee", "sailordrone", "roadman", "classicferret", "cookiesleather", "milkysweep", "bakeleather", "skilletsocial", "picklespipe", "remotehumor"]
 let MUTATION_COUNT = 5;
 
@@ -121,7 +143,6 @@ function GetRandomUserName()
 {
     return `${USERNAMES[randomRange(0,USERNAMES.length - 1)]}${randomRange(0,100)}`;
 }  
-
 
 
 /**
