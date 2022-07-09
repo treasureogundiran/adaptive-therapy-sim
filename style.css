@@ -39,12 +39,12 @@ img {
   width: 1000px;
   height: 120px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .control-section
 {
+  flex-grow: 1;
   min-width: 250px;
   border: 1px solid black;
   border-bottom: none;
@@ -141,15 +141,78 @@ button:hover {
   cursor: pointer;
 }
 
-/*  */
+.score-info
+{
+  border-right: none;
+  justify-content: center;
+}
+
+.score-info input
+{
+  margin-left: 2px;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.score-info input:hover
+{
+  height: 45px;
+  width: 205px;
+  transition: 0.1s;
+}
+
+.score-info button
+{
+  width: 200px;
+  height: 40px;
+  background:rgb(255, 166, 0);
+  font-weight: bold;
+}
+
+.score-info button:hover
+{
+  width: 205px;
+  height: 45px;
+  /* background:rgb(255, 192, 76); */
+  transition: 0.1s;
+}
+
+#instructions-button
+{
+  padding: 0;
+  color: rgb(0, 0, 201);
+  background: none;
+}
+
+#instructions-button:hover
+{
+  color: rgb(40, 40, 250);
+  font-size: 20px;
+  transition: 0.1s;
+}
+
+.intensityControl {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 .slideContainer {
-  width: 200px;
-  /* border: solid 1px blue; */
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: none;
+  border: none;
 }
 
 #intensity {
@@ -208,60 +271,6 @@ button:hover {
 }
 
 
-.score-info
-{
-  border-right: none;
-  justify-content: center;
-}
-
-.score-info input
-{
-  margin-left: 2px;
-  height: 40px;
-  width: 200px;
-  font-size: 20px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.score-info input:hover
-{
-  height: 45px;
-  width: 205px;
-  transition: 0.1s;
-}
-
-.score-info button
-{
-  width: 200px;
-  height: 40px;
-  background:rgb(255, 166, 0);
-  font-weight: bold;
-}
-
-.score-info button:hover
-{
-  width: 205px;
-  height: 45px;
-  /* background:rgb(255, 192, 76); */
-  transition: 0.1s;
-}
-
-#instructions-button
-{
-  padding: 0;
-  color: rgb(0, 0, 201);
-  background: none;
-}
-
-#instructions-button:hover
-{
-  color: rgb(40, 40, 250);
-  font-size: 20px;
-  transition: 0.1s;
-}
-
 .modal
 {
   display: none;
@@ -280,9 +289,9 @@ button:hover {
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
   border: 2px solid rgb(24, 69, 59);
   width: 700px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -371,4 +380,27 @@ button:hover {
 .secondary-list li
 {
   margin: 5px auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+  margin:2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(195, 210, 207);
+}
+
+/* Track */
+::-webkit-scrollbar-track:hover {
+  background: rgb(164, 193, 187);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  margin:5px;
+  background: rgba(24, 69, 59, 1);
+  transition: opacity 1s;
 }

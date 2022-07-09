@@ -119,18 +119,6 @@
           </div>
           
         </div>
-        
-        <div class="control-section slideContainer">
-          <div id="intensityDisplay">Intensity: 0%</div>
-          <input
-            id="intensity"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            class="slider"
-          />
-        </div>
   
         <div class="control-section score-info">
             <input id="name-input" type="text" value="" placeholder="Name" />
@@ -144,6 +132,19 @@
       </div>
     </div>
     <canvas id="simScreen" width="1000" height="800"> </canvas>
+    <div class="intensityControl">
+      <div class="control-section slideContainer">
+        <div id="intensityDisplay">Intensity: 0%</div>
+        <input
+          id="intensity"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="slider"
+        />
+      </div>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
